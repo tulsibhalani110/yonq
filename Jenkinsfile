@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://username:password@github.com/tulsibhalani110/myappsample.git']]])
+            checkout sem
             }
         }
 
