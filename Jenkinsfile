@@ -2,21 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Print Message') {
+        stage('Checkout') {
             steps {
-                echo 'Hello, this is a message printed in Jenkins!'
+                // Checkout your source code from version control (e.g., Git)
+                checkout scm
             }
         }
 
-        // Add more stages as needed
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed :('
+        stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
+                script {
+                    docker.build("your-docker-image-name:latest")
+                }
+            }
         }
     }
 }
