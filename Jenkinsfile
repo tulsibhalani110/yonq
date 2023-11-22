@@ -2,20 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                // Checkout your source code from version control (e.g., Git)
-                checkout scm
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                // Build the Docker image
-                script {
-                    docker.build("your-docker-image-name:latest")
-                }
+                echo 'Building your project...'
+                // Add your build command here
             }
         }
     }
 }
+
+    post {
+        success {
+            echo 'Docker build successful!'
+        }
+
+        failure {
+            echo 'Docker build failed!'
+        }
+    }
