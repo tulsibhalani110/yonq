@@ -3,15 +3,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/your-username/your-repository.git'
-            }
-        }
-
         stage('Build') {
             steps {
-                sh ''
+                
+                git 'https://github.com/your-username/your-repository.git'
+               
             }
         }
     }
@@ -22,7 +18,7 @@ pipeline {
         }
 
         failure {
-            echo 'Pipeline failed :('failure')
+            echo 'Pipeline failed :('failer')
         }
     }
 }
