@@ -1,40 +1,49 @@
-
 pipeline {
     agent any
 
     stages {
         stage('Checkout') {
             steps {
-                sh 'checkout scm'
+                // This stage checks out the code from the version control system
+                checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                sh 'jdk clean install'
+                // This stage builds the project (you may need to adjust this based on your project)
+                sh 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'jdk test'
+                // This stage runs tests (you may need to adjust this based on your project)
+                sh 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'jdk deploy'
+                // This stage deploys the application (you may need to adjust this based on your project)
+                sh 'mvn deploy'
             }
         }
     }
 
     post {
         success {
+            // This block is executed if the pipeline is successful
             echo 'Pipeline succeeded!'
+
+            // You can add additional steps or notifications here
         }
 
         failure {
-            echo 'Pipeline failed :('failuer')
+            // This block is executed if the pipeline fails
+            echo 'Pipeline failed :('
+
+            // You can add additional steps or notifications here
         }
     }
 }
