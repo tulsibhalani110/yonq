@@ -2,29 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build') {
             steps {
+                // This stage builds the project (adjust the command based on your project)
                 sh 'mvn clean install'
             }
         }
+    }
 
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
+    post {
+        success {
+            // This block is executed if the pipeline is successful
+            echo 'Build succeeded!'
+
+            // You can add additional steps or notifications here
         }
 
-        stage('Deploy') {
-            steps {
-                sh 'mvn deploy'
-            }
+        failure {
+            // This block is executed if the pipeline fails
+            echo 'Build failed :('
+
+            // You can add additional steps or notifications here
         }
+    }
+}
+
     }
 
     post {
