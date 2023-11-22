@@ -3,11 +3,27 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
-                
-                git 'https://github.com/tulsibhalani110/yonq.git'
-               
+                sh 'jdk clean install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'jdk test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'jdk deploy'
             }
         }
     }
@@ -18,7 +34,7 @@ pipeline {
         }
 
         failure {
-            echo 'Pipeline failed :('failer')
+            echo 'Pipeline failed :('failuer')
         }
     }
 }
