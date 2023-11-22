@@ -2,31 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Print Message') {
             steps {
-                sh 'mvn clean install'
+                echo 'Hello, this is a message printed in Jenkins!'
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh 'mvn deploy'
-            }
-        }
+        // Add more stages as needed
     }
+
     post {
         success {
             echo 'Pipeline succeeded!'
         }
-
         failure {
-            echo 'Pipeline failed :('failuer')
+            echo 'Pipeline failed :('
         }
     }
 }
