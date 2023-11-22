@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-            checkout sem
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'mvn clean install'
