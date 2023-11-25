@@ -1,6 +1,12 @@
 
-FROM nginx:latest
+FROM busybox
 
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY nginx.conf /etc/nginx/nginx.conf
+WORKDIR /app
+COPY app_main ./app_main
+ENV LANG en_US.UTF-8
+
+
+EXPOSE 90
+
+CMD ["app_main"]
