@@ -1,11 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('Build BusyBox Image') {
+        stage('Build') {
             steps {
                 script {
-                    def customImage = docker.build("my-busybox-image:${env.busybox}", ".")
-                    customImage.push()
+                    docker.build("my-redis-image:latest", "--file Dockerfile .")
                 }
             }
         }
