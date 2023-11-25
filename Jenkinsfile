@@ -1,22 +1,20 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'docker:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building your project...'
-                // Add your build command here
+                sh 'docker build -t my-nginx .'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker run -d -p 80:80 my-nginx'
             }
         }
     }
 }
-
-    post {
-        success {
-            echo 'Docker build successful!'
-        }
-
-        failure {
-            echo 'Docker build failed!'
-        }
-    }
