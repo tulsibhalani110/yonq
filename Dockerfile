@@ -1,11 +1,15 @@
 
-FROM busybox
+# Use an official Redis image as a parent
+FROM redis:latest
 
+# Set the working directory
+WORKDIR /usr/src/app
 
-WORKDIR /app
-COPY . .
+# Copy the custom configuration file into the Docker image
+COPY redis.conf /usr/src/app/redis.conf
 
+# Expose the Redis port
+EXPOSE 6379
 
-EXPOSE 90
-
-
+# Command to run Redis using the custom configuration file
+CMD [ "redis-server", "/usr/src/app/redis.conf" ]
