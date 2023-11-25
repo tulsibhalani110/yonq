@@ -1,19 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     stages {
-        stage('Build') {
+        stage('Build BusyBox Image') {
             steps {
-                sh 'docker build -t my-nginx .'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'docker run -d -p 80:80 my-nginx'
+                script {
+                    def customImage = docker.build("my-busybox-image:${env.BUILD_ID}", ".")
+                    customImage.push()
+                }
             }
         }
     }
